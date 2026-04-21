@@ -1,6 +1,6 @@
-## Stateless Interaction-Driven Recommendation Engine
+## Stateless Interaction-Driven Feed Recommendation Engine
 
-**Stateless Interaction-Driven Recommendation Engine** is a high-performance, session-based content synthesis engine that leverages real-time Machine Learning (Logistic Regression) to personalize user feeds on the fly. By transforming every scroll and heart-click into a live training session, the system solves the "Cold Start" problem, providing instant feed adaptation without requiring traditional user authentication.
+**Stateless Interaction-Driven Feed Recommendation Engine** is a high-performance, session-based content synthesis engine that leverages real-time Machine Learning (Logistic Regression) to personalize user feeds on the fly. By transforming every scroll and heart-click into a live training session, the system solves the "Cold Start" problem, providing instant feed adaptation without requiring traditional user authentication.
 
 ---
 
