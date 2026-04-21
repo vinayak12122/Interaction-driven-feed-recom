@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Rogbold';
+  /* Make sure the filename matches exactly */
+  src: url('./assets/fonts/Rogbold-3llGM.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  /* Make sure the filename matches exactly */
+  src: url('./assets/fonts/Poppins-Regular.ttf') ('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-rogbold: "Rogbold", "sans-serif";
+  --font-poppins: "Poppins", "sans-serif";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.main {
+  margin:0;
+  padding: 0;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: black;
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.main>div {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
