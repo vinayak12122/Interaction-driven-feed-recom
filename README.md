@@ -6,12 +6,7 @@
 
 ## 📸 Interface Preview
 
-| Home Feed (Mobile) | Interaction States | Personalized Discovery |
-| :--- | :--- | :--- |
-| ![Feed View](https://via.placeholder.com/200x400?text=Snap+Scroll+Feed) | ![Liked State](https://via.placeholder.com/200x400?text=Active+Interaction) | ![Smart Recommendations](https://via.placeholder.com/200x400?text=ML+Prioritized+Content) |
-*Place your actual frontend screenshots in a `/docs` folder and update these paths.*
 
----
 
 ## 🚀 Core Features
 
