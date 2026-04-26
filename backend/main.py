@@ -21,7 +21,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["feed-three-sand.vercel.app"],
+    allow_origins=["https://feed-three-sand.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=['*'],
