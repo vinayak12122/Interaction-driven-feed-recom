@@ -15,7 +15,7 @@ from recommender import get_recommendation,GENRE_FEATURES
 
 Base.metadata.create_all(bind=engine)
 
-port = int(os.environ.get("PORT", 8000))
+port = int(os.environ.get("PORT", 2006))
 
 app = FastAPI()
 
