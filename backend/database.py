@@ -8,6 +8,9 @@ load_dotenv()
 
 db = os.getenv("DB_URL")
 
+if db and db.startswith("postgresql://"):
+    db = db.replace("postgresql://", "postgresql+psycopg2://", 1)
+
 engine = create_engine(db,connect_args={"sslmode": "require"})
 
 SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)

@@ -15,6 +15,8 @@ from recommender import get_recommendation,GENRE_FEATURES
 
 Base.metadata.create_all(bind=engine)
 
+port = int(os.environ.get("PORT", 8000))
+
 app = FastAPI()
 
 app.add_middleware(
@@ -117,4 +119,4 @@ def test_db(db: Session = Depends(get_db)):
         return {"status": "error", "details": str(e)}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app",port=2006,reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
