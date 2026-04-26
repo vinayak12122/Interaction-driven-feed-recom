@@ -29,7 +29,7 @@ app.add_middleware(
 
 app.mount(
     "/images", 
-    StaticFiles(directory="images", html=True), 
+    StaticFiles(directory="Images", html=True), 
     name="images"
 )
 
