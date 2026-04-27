@@ -44,3 +44,7 @@ body {
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+
+.scrollbar-hide::-webkit-scrollbar{
+  display: none;
+}
