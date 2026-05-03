@@ -22,11 +22,34 @@ def get_recommendation(user_history_df,all_movies_df,top_n=20):
         X_train = user_history_df[GENRE_FEATURES]
         y_train = user_history_df['liked']
 
-        model = LogisticRegression()
-        model.fit(X_train,y_train)
+        unique_classes = y_train.unique()
 
         seen_ids = user_history_df['id'].values
         candidates = all_movies_df[~all_movies_df['id'].isin(seen_ids)].copy()
+
+        if len(candidates) == 0:
+            return all_movies_df.sample(min(top_n,len(all_movies_df))).reset_index(drop=True)
+        
+        if len(unique_classes) < 2:
+            single_class = unique_classes[0]
+            if single_class == 1:
+                liked_genres = X_train.sum().sort_values(ascending=False)
+                top_genre = liked_genres.index[0]
+                smart_picks = candidates[candidates[top_genre] == 1].head(top_n)
+                
+                if len(smart_picks) < top_n:
+                    remaining = candidates[~candidates['id'].isin(smart_picks['id'])]
+                    padding = remaining.sample(min(top_n - len(smart_picks), len(remaining)))
+                    smart_picks = pd.concat([smart_picks, padding])
+                
+                return smart_picks.sample(frac=1).reset_index(drop=True)
+            else:
+                return candidates.sample(min(top_n, len(candidates))).reset_index(drop=True)
+            
+
+        model = LogisticRegression(solver="liblinear")
+        model.fit(X_train,y_train)
+
 
         probs = model.predict_proba(candidates[GENRE_FEATURES])[:,1]
         candidates['score'] = probs
