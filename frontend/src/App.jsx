@@ -109,11 +109,11 @@ const syncWithBackend = async (forceRefresh = false) => {
       body: JSON.stringify(payload)
     });
 
-    const triggerThreshold = Math.floor(imgData.length * 0.8);
+    const triggerThreshold = imgData.length - 5;
 
     if (forceRefresh || (currentIdx >= triggerThreshold && imgData.length > 0)) {
 
-      const limit = forceRefresh ? 10 : 20
+      const limit = forceRefresh ? 15 : 30
       const res = await fetch(`${BACKEND_URL}/feed?session_id=${sessionId}&limit=${limit}`);
       const freshRecommendations = await res.json();
 
@@ -177,6 +177,9 @@ const handleScroll = () => {
       }
     }
     setCurrentIdx(newIdx);
+    if(newIdx >= imgData.length - 5){
+      syncWithBackend(true);
+    }
   }
   // if (containerRef.current) {
   //   const { scrollTop, offsetHeight } = containerRef.current;
@@ -210,17 +213,17 @@ const handleDownload = async (filename) => {
 }
 
 const getImage = async () => {
-  const today = new Date().toLocaleDateString();
-  const savedData = localStorage.getItem('daily_feed');
-  const savedDate = localStorage.getItem('feed_date');
+  // const today = new Date().toLocaleDateString();
+  // const savedData = localStorage.getItem('daily_feed');
+  // const savedDate = localStorage.getItem('feed_date');
 
-  if (savedData && savedDate === today) {
-    const parsed = JSON.parse(savedData);
-    if (parsed.length > 0) {
-      setImgData(parsed);
-      return;
-    }
-  }
+  // if (savedData && savedDate === today) {
+  //   const parsed = JSON.parse(savedData);
+  //   if (parsed.length > 0) {
+  //     setImgData(parsed);
+  //     return;
+  //   }
+  // }
 
   try {
     const res = await fetch(`${BACKEND_URL}/feed?session_id=${sessionId}`);
@@ -229,8 +232,8 @@ const getImage = async () => {
 
     const data = await res.json();
     setImgData(data);
-    localStorage.setItem('daily_feed', JSON.stringify(data));
-    localStorage.setItem('feed_date', today);
+    // localStorage.setItem('daily_feed', JSON.stringify(data));
+    // localStorage.setItem('feed_date', today);
   } catch (error) {
     console.error('Error Fetching Feed : ', error);
     setError('Currently Server is Down or :', error)
