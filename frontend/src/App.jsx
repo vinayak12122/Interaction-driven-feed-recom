@@ -172,7 +172,7 @@ const App = () => {
             liked: isLiked ? 1 : 0
           });
 
-          console.log(`Log: Movie ${movie.id} marked as ${isLiked ? 'LIKE' : 'SKIP'}`);
+          // console.log(`Log: Movie ${movie.id} marked as ${isLiked ? 'LIKE' : 'SKIP'}`);
 
         }
         syncedIndices.current.add(currentIdx);
@@ -324,7 +324,8 @@ const App = () => {
                 src={`${BACKEND_URL}/images/${item.poster_url}`}
 
                 alt=""
-
+                loading='lazy'
+                decoding='async'
                 className="w-[95%] h-[70%] object-cover md:h-[85vh] md:w-auto md:max-w-[90%] md:rounded-lg md:object-contain  md:translate-y-0 transform translate-y-[15%] select-none"
 
               />
