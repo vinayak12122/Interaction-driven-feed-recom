@@ -20,6 +20,7 @@ const App = () => {
   const [error, setError] = useState('');
   const [deleteModel, setDeleteModel] = useState(false);
   const [openShare, setOpenShare] = useState(false);
+  const [closeMessage,setCloseMessage] = useState(true);
 
   const containerRef = useRef(null);
   const syncedIndices = useRef(new Set());
@@ -252,6 +253,52 @@ const App = () => {
   return (
     <div className="relative w-full h-dvh bg-black overflow-hidden">
       {openShare && <ShareModel onClose={() => setOpenShare(false)} />}
+      {closeMessage && (
+        <div className="absolute inset-0 z-500 flex items-center justify-center bg-black/75 backdrop-blur-sm px-4">
+          <div className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-950 px-6 py-5 shadow-2xl">
+
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="text-white text-3xl font-bold">
+                  Please wait
+                </h2>
+
+                <p className="text-zinc-500 text-sm mt-1">
+                  Backend is restarting
+                </p>
+              </div>
+
+              <button
+                onClick={() => setCloseMessage(false)}
+                className="text-white transition-colors cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="mt-5 space-y-3 text-base leading-relaxed">
+              <p className="text-white/80">
+                This project runs on <span className="font-semibold text-white">Render free tier</span>.
+              </p>
+
+              <p className="text-zinc-400">
+                After 1 minute of inactivity, the server sleeps automatically.
+              </p>
+
+              <p className="text-zinc-400">
+                It takes around <span className="font-semibold text-white">40–60 seconds</span> to restart and load the feed.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setCloseMessage(false)}
+              className="mt-5 w-full rounded-xl border border-zinc-800 py-2.5 text-sm text-white hover:bg-zinc-900 transition-all cursor-pointer"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
       {deleteModel && (
         <div className='fixed inset-0 z-200 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4 '>
           <div className='bg-zinc-950 border border-gray-700/70 p-4 rounded-xl mzx-w-sm w-full shadow-2xl'
